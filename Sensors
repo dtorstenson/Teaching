@@ -1,1 +1,35 @@
+package org.usfirst.frc.team7109.robot;
 
+import.edu.wpi.first.wpilibj.Spark;
+import.edu.wpi.first.wpilibj.DriverStation;
+import.edu.wpi.first.wpilibj.Joystick;
+import.edu.wpi.first.wpilibj.DoubleSolenoid;
+
+public class Robot extends InterativeRobot {
+
+ private Spark spark1;
+ private Spark spark2;
+ private Spark spark3;
+ private Spark spark4;
+ private Spark spark5;
+ DoubleSolenoid solenoid1 = new DoubleSolenoid(1, 2);
+ DoubleSolenoid solenoid2 = new DoubleSolenoid(3, 4);
+ Solenoid climb = new Solenoid(5);
+ 
+ DriverStation matchInfo = DriverStation.getInstance();
+ 
+ Joystick joy1 = new Joystick(0);
+ 
+}
+
+public void autonomousPeriodic() {
+
+}
+
+public void teleopInit() {
+
+}
+
+public void teleopPeriodic() {
+  
+}
