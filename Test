@@ -1,0 +1,85 @@
+package frc.robot;
+
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Spark;
+import edu.wpi.first.wpilibj.SpeedControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+
+public class Robot extends TimedRobot {
+  private static final String kDefaultAuto = "Default";
+  private static final String kCustomAuto = "My Auto";
+  private String m_autoSelected;
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+
+  DriverStation matchInfo = DriverStation.getInstance();
+
+  Joystick joy1 = new Joystick(0);
+ 
+  Spark frontLeft = new Spark(0);
+  Spark frontRight = new Spark(1);
+  Spark backLeft = new Spark(2);
+  Spark backRight = new Spark(3);
+  
+  SpeedControllerGroup left = new SpeedControllerGroup(frontLeft, frontRight);
+  SpeedControllerGroup right = new SpeedControllerGroup(backLeft, backRight);
+
+  DifferentialDrive traction = new DifferentialDrive(left, right);
+
+  @Override
+  public void robotInit() {
+    m_chooser.setDefaultOption("Default Auto", kDefaultAuto);
+    m_chooser.addOption("My Auto", kCustomAuto);
+    SmartDashboard.putData("Auto choices", m_chooser);
+  }
+
+  @Override
+  public void robotPeriodic() {
+  }
+
+ 
+  @Override
+  public void autonomousInit() {
+    m_autoSelected = m_chooser.getSelected();
+    // autoSelected = SmartDashboard.getString("Auto Selector",
+    // defaultAuto);
+    System.out.println("Auto selected: " + m_autoSelected);
+  }
+
+  
+  @Override
+  public void autonomousPeriodic() {
+    switch (m_autoSelected) {
+      case kCustomAuto:
+        // Put custom auto code here
+        break;
+      case kDefaultAuto:
+      default:
+        // Put default auto code here
+        break;
+    }
+  }
+
+ 
+  @Override
+  public void teleopPeriodic() {
+
+    traction.arcadeDrive(joy1.getY(), joy1.getX());
+     
+
+  }
+
+ 
+  @Override
+  public void testPeriodic() {
+  }
+
+  @Override
+  public void startCompetition() {
+
+  }
+}
